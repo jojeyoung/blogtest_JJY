@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.cos.blogappTest.domain.user.User;
 import com.cos.blogappTest.domain.user.UserRepository;
 import com.cos.blogappTest.web.dto.JoinReqDto;
+import com.cos.blogappTest.web.dto.LoginReqDto;
 
 @Controller
 public class UserController {
@@ -36,12 +37,31 @@ public String home() {
  public String join(JoinReqDto dto) {
 	User user = new User();
 	user.setUsername(dto.getUsername());
-	user.setPassoword(dto.getPassword());
+	user.setPassword(dto.getPassword());
 	user.setEmail(dto.getEmail());
 	
 	userRepository.save(user);
 	
 	return  "redirect:/loginForm";
+}
+
+@GetMapping("/login")
+ public String login() {
+	return "user/loginForm";
+}
+@PostMapping("/login")
+public String login(LoginReqDto dto) {
+	System.out.println(dto.getUsername());
+	System.out.println(dto.getPassword());
+	
+	User UEntity = userRepository.mLoing(dto.getUsername(), dto.getPassword());
+	if( UEntity == null ) {
+		return "redirect:/loginForm";
+	}else {
+		httpSession.setAttribute("principal", UEntity);
+		return "redirect:/home";
+	}
+	
 }
 
 

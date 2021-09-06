@@ -16,7 +16,7 @@
 <nav class="navbar navbar-expand-sm bg-light">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="/login">블로그</a>
+      <a class="nav-link" href="/home">블로그</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="/login">로그인</a>
